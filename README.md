@@ -1,10 +1,10 @@
 TurtleBot Arm
 =============
 
-Indigo version of turtlebot arm code. It should easily work on Hydro, too. Package turtlebot_arm_moveit_demos provides use examples to start playing with the arm on MoveIt!, while the recovered on indigo turtlebot_arm_block_manipulation provides a more complete and interesting demo.
+ROS Indigo version of turtlebot arm code with support for PhantomX Pincher. It should work on ROS Hydro as well. Package turtlebot_arm_moveit_demos provides examples to start playing with the arm on MoveIt!, while the indigo turtlebot_arm_block_manipulation provides a more complete and interesting demo.
 
 ## Selecting Arm Type
-By default this will work with the original white/green TurtleBot arm.  To use the PhantomX Pincher, set environment variable "TURTLEBOT_ARM1" to pincher. You will need arbotix_ros version 0.11.0 or higher for PhantomX Pincher.
+By default the code uses the original white/green TurtleBot arm.  To use the PhantomX Pincher, set the environment variable "TURTLEBOT_ARM1" to pincher. You will need arbotix_ros version 0.11.0 or higher for PhantomX Pincher.
 
 ## Attaching the Arm to a Robot
 Open your xacro-macro-magic URDF, and add something like:
@@ -15,16 +15,16 @@ Open your xacro-macro-magic URDF, and add something like:
           <origin xyz="0 0 1"/>
         </turtlebot_arm>
 
-This will attach a turtlebot arm to your robot. Replace base_link with whatever link you want to attach to, and change the origin as needed. Apart from color, we can configure joints velocity limit and lower/upper limits for the first joint (arm_shoulder_pan) to allow accessing to different operational areas, e.g. left handed vs. right handed robot
+This will attach a turtlebot arm to your robot. Replace base_link with the base link you use to attach the arm, and change the origin as needed. Apart from color, you can configure joint velocity limit and lower/upper limits for the first joint (arm_shoulder_pan) to allow access to different operational areas, e.g. left handed vs. right handed robot
 
 ## Running MoveIt
-Ensure you have all the required dependencies by running (you probably did it before compiling):
+Ensure you have all the required dependencies by running:
 
        cd turtlebot_arm
        rosdep install --from-paths -i -y src
 
-Before start playing, I highly recommend to calibrate your camera extrinsic parameters following [this tutorial](http://wiki.ros.org/turtlebot_kinect_arm_calibration/Tutorials/CalibratingKinectToTurtleBotArm)
+Before you start playing, calibrate your camera extrinsic parameters following [this tutorial](http://wiki.ros.org/turtlebot_kinect_arm_calibration/Tutorials/CalibratingKinectToTurtleBotArm)
 
-The turtlebot_arm_moveit_config/demo.launch is a bit wonky, but the move_group action underlying it works fine. To test your installation, run one of the demos (well, demo by now) from turtlebot_arm_moveit_demos, e.g.:
+The turtlebot_arm_moveit_config/demo.launch is a bit wonky, but the move_group action underlying it works fine. To test your installation, run the pick and place demo from turtlebot_arm_moveit_demos, e.g.:
 
        rosrun turtlebot_arm_moveit_demos pick_and_place.py
